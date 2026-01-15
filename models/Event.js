@@ -24,10 +24,22 @@ const eventSchema = new mongoose.Schema(
       required: [true, "Start time is required"],
       match: [/^\d{2}:\d{2}$/, "Start time must be in HH:mm format"],
     },
+    startMinutes: {
+      type: Number,
+      required: true,
+      min: [0, "Start minutes must be >= 0"],
+      max: [1439, "Start minutes must be < 1440"],
+    },
     endTime: {
       type: String,
       required: [true, "End time is required"],
       match: [/^\d{2}:\d{2}$/, "End time must be in HH:mm format"],
+    },
+    endMinutes: {
+      type: Number,
+      required: true,
+      min: [0, "End minutes must be >= 0"],
+      max: [1440, "End minutes must be < 1440"],
     },
     createdBy: {
       type: String,
