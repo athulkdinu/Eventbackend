@@ -16,12 +16,17 @@ const adminRoutes = require("./routes/adminRoutes");
 const server = express();
 
 // middleware
-server.use(cors({
+const corsOptions = {
   origin: [
     "http://localhost:5173",
-    "https://eventfrontend-delta.vercel.app"
-  ]
-}));
+    "https://eventfrontend-delta.vercel.app",
+  ],
+  methods: ["GET", "POST", "PUT", "PATCH", "DELETE", "OPTIONS"],
+  allowedHeaders: ["Content-Type", "Authorization"],
+};
+
+server.use(cors(corsOptions));
+server.options("*", cors(corsOptions)); // handle preflight requests
 server.use(express.json());
 
 // routes
