@@ -1,47 +1,42 @@
-// 1. import dotenv
+// load env
 require("dotenv").config();
 
-// 2. import express
+// imports
 const express = require("express");
-
-// 3. import cors
 const cors = require("cors");
 
-// 4. import database connection (connects automatically)
+// db connection
 require("./config/db");
 
-// 5. import routes
+// routes
 const eventRoutes = require("./routes/eventRoutes");
 const adminRoutes = require("./routes/adminRoutes");
 
-// 6. create server
+// create server
 const server = express();
 
-// 7. use middleware
-app.use(cors({
+// middleware
+server.use(cors({
   origin: [
     "http://localhost:5173",
     "https://eventfrontend-delta.vercel.app"
   ]
 }));
-
-server.use(cors(corsOptions));
-server.options("*", cors(corsOptions)); // handle preflight requests
 server.use(express.json());
 
-// 9. use routes
+// routes
 server.use(eventRoutes);
 server.use(adminRoutes);
 
-// 10. test route
+// test route
 server.get("/", (req, res) => {
-  res.status(200).send("Event Scheduler API running");
+  res.send("Event Scheduler API running");
 });
 
-// 11. set port
+// port
 const PORT = process.env.PORT || 5000;
 
-// 12. start server
+// start
 server.listen(PORT, () => {
   console.log(`Server running on port ${PORT}`);
 });
