@@ -18,7 +18,9 @@ const adminRoutes = require("./routes/adminRoutes");
 const server = express();
 
 // 7. use middleware
-server.use(cors());
+const corsOptions = { origin: "http://localhost:5173" };
+server.use(cors(corsOptions));
+server.options("*", cors(corsOptions)); // handle preflight requests
 server.use(express.json());
 
 // 9. use routes
